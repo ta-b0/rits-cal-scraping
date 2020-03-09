@@ -34,6 +34,8 @@ def parse_cal(df):
 # ics形式で出力させる
 def parse_cal_in_ics(df):
     cal = Calendar()
+    cal.add('prodid', '-//rits-cal-scraping//')
+    cal.add('version', '2.0')
     for i in range(len(df)):
         event = Event()
         # 日付の処理
