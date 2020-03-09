@@ -12,7 +12,7 @@ def read_cal():
         df = data[semester]
         # print(df)
         parse_cal(df)
-        # parse_cal_in_ics(df)
+        parse_cal_in_ics(df)
 
 def parse_cal(df):
     tocsv = [["Subject","Start Date","End Date","Description","Location"]]
