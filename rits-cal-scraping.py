@@ -11,8 +11,8 @@ def read_cal():
     for semester in range(2):
         df = data[semester]
         # print(df)
-        parse_cal(df)
-        # parse_cal_in_ics(df)
+        # parse_cal(df)
+        parse_cal_in_ics(df)
 
 def parse_cal(df):
     tocsv = [["Subject","Start Date","End Date","Description","Location"]]
@@ -36,19 +36,22 @@ def parse_cal_in_ics(df):
     cal = Calendar()
     cal.add('prodid', '-//rits-cal-scraping//')
     cal.add('version', '2.0')
+    cal.add('method', 'PUBLISH')
+    cal.add('x-wr-calname', 'rits_calendar')
+    cal.add('x-wr-timezone', 'Asia/Tokyo')
+    cal.add('CALSCALE', 'GREGORIAN')
     for i in range(len(df)):
         event = Event()
         # 日付の処理
         date = Date(df, i)
         summary = df.at[i,'行事']
-        # 開始時間と終了時間を同じ日にしている，これで終日になる??
         event.add('dtstart', date.ical_datetime())
         event.add('dtend', date.ical_datetime())
         event.add('summary', summary)
         event.add('location', "立命館大学")
         cal.add_component(event)
 
-    with open("cal.ics","a") as f:
+    with open("cal.ics","w") as f:
         print(display(cal))
         f.write(display(cal))
 
