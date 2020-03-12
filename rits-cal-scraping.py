@@ -11,7 +11,7 @@ def read_cal():
     for semester in range(2):
         df = data[semester]
         # print(df)
-        # parse_cal(df)
+        parse_cal(df)
         parse_cal_in_ics(df)
 
 def parse_cal(df):
